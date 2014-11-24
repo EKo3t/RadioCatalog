@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "ChangeLanguage";
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+}
+@helper selected(string c, string culture)
+{
+    if (c == culture)
+    {
+        @:checked="checked"
+    }
+}
+@using (Html.BeginForm("SetCulture", "Language"))
+{
+    <fieldset>
+        <legend>@Resources.ChooseYourLanguage </legend>
+        <div class="control-group">
+            <div class="controls">
+                <label for="en-US">
+                    <input name="culture" id="en-US" value="en-US" type="radio" @selected("en-US", culture) /> English
+                </label>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <label for="ru">
+                    <input name="culture" id="ru" value="ru" type="radio" @selected("ru", culture) /> Русский
+                </label>
+            </div>
+        </div>
+
+    </fieldset>
+}
+@section Scripts
+    {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+            (function ($) {
+                $("input[type = 'radio']").click(function () {
+                    $(this).parents("form").submit();
+                });
+
+            })(jQuery);
+    </script>
+}
+
