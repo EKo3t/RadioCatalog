@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RadioCatalog", "RadioCatalog\RadioCatalog.csproj", "{0BBE9CBB-B020-4124-8D07-00BD25F43669}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resources", "..\Resources\Resources.csproj", "{61783EDA-0982-49A9-8F88-9176AA3C94E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0BBE9CBB-B020-4124-8D07-00BD25F43669}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BBE9CBB-B020-4124-8D07-00BD25F43669}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BBE9CBB-B020-4124-8D07-00BD25F43669}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61783EDA-0982-49A9-8F88-9176AA3C94E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61783EDA-0982-49A9-8F88-9176AA3C94E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61783EDA-0982-49A9-8F88-9176AA3C94E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61783EDA-0982-49A9-8F88-9176AA3C94E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

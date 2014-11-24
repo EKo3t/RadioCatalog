@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Net.Mail;
 using System.Security.Claims;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -69,16 +70,16 @@ namespace IdentitySample.Models
     }
 
     // Configure the RoleManager used in the application. RoleManager is defined in the ASP.NET Identity core assembly
-    public class ApplicationRoleManager : RoleManager<IdentityRole>
+    public class ApplicationRoleManager : RoleManager<ApplicationRole>
     {
-        public ApplicationRoleManager(IRoleStore<IdentityRole,string> roleStore)
+        public ApplicationRoleManager(IRoleStore<ApplicationRole,string> roleStore)
             : base(roleStore)
         {
         }
 
         public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
         {
-            return new ApplicationRoleManager(new RoleStore<IdentityRole>(context.Get<ApplicationDbContext>()));
+            return new ApplicationRoleManager(new RoleStore<ApplicationRole>(context.Get<ApplicationDbContext>()));
         }
     }
 
@@ -86,8 +87,23 @@ namespace IdentitySample.Models
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            var credentialUserName = "MailForLocalhost@gmail.com";
+            var sentFrom = "MailForLocalhost@gmail.com";
+            var pwd = "DryQM3Y7WdN2rjIvbqh1";
+            SmtpClient client = new SmtpClient("smtp.gmail.com");
+            client.Port = 587;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(credentialUserName, pwd);
+            client.EnableSsl = true;
+            client.Credentials = credentials;
+            var mail = new System.Net.Mail.MailMessage();
+            mail.To.Add(new MailAddress(message.Destination));
+            mail.From = new MailAddress(sentFrom);
+            mail.IsBodyHtml = true;
+            mail.Subject = message.Subject;
+            mail.Body = message.Body;
+            return client.SendMailAsync(mail);
         }
     }
 
@@ -103,7 +119,7 @@ namespace IdentitySample.Models
     // This is useful if you do not want to tear down the database each time you run the application.
     // public class ApplicationDbInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
     // This example shows you how to create a new database if the Model changes
-    public class ApplicationDbInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext> 
+    public class ApplicationDbInitializer : DropCreateDatabaseAlways<ApplicationDbContext> 
     {
         protected override void Seed(ApplicationDbContext context) {
             InitializeIdentityForEF(context);
@@ -115,20 +131,22 @@ namespace IdentitySample.Models
             var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var roleManager = HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>();
             const string name = "admin@example.com";
-            const string password = "Admin@123456";
+            const string password = "Inv1sibility!";
             const string roleName = "Admin";
+            const string userName = "godAdmin";
 
             //Create Role Admin if it does not exist
             var role = roleManager.FindByName(roleName);
             if (role == null) {
-                role = new IdentityRole(roleName);
+                role = new ApplicationRole(roleName);
                 var roleresult = roleManager.Create(role);
             }
 
             var user = userManager.FindByName(name);
             if (user == null) {
-                user = new ApplicationUser { UserName = name, Email = name };
+                user = new ApplicationUser { NickName = userName, UserName = name, Email = name };
                 var result = userManager.Create(user, password);
+                user.ConfirmedEmail = true;
                 result = userManager.SetLockoutEnabled(user.Id, false);
             }
 

@@ -9,11 +9,12 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using RadioCatalog.Controllers;
 
 namespace IdentitySample.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         public AccountController()
         {
@@ -69,9 +70,21 @@ namespace IdentitySample.Controllers
             {
                 return View(model);
             }
+            var user = await UserManager.FindAsync(model.Email, model.Password);
+            if (user != null)
+            {
+                if (user.ConfirmedEmail == false)
+                {
+                    ModelState.AddModelError("", "Confirm Email Address.");
+                    return View(model);
+                }
+            }
+            else
+            { 
+                ModelState.AddModelError("", "Invalid username or password.");
+                return View(model);
+            }
 
-            // This doen't count login failures towards lockout only two factor authentication
-            // To enable password failures to trigger lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
@@ -150,6 +163,8 @@ namespace IdentitySample.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                user.Address = model.Address;
+                user.NickName = model.NickName;
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

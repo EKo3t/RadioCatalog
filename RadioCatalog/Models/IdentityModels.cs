@@ -16,8 +16,21 @@ namespace IdentitySample.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public string Address { get; set; }
+
+        public string NickName { get; set; }
+
+        public bool ConfirmedEmail { get; set; } 
     }
 
+    public class ApplicationRole : IdentityRole
+    {
+        public ApplicationRole() : base() { }
+        public ApplicationRole(string name) : base(name) { }
+        public string Description { get; set; }
+
+    }
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()

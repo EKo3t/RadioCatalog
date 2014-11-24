@@ -1,33 +1,15 @@
-﻿using System.Web.Mvc;
-using RadioCatalog.Controllers;
-using RadioCatalog.Helpers;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+using RadioCatalog.Helpers;
 
-namespace IdentitySample.Controllers
+namespace RadioCatalog.Controllers
 {
-    public class HomeController : BaseController
+    public class LanguageController : BaseController
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        [Authorize]
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your app description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
+        // GET: Language
         public ActionResult SetCulture(string culture)
         {
             // Validate input
@@ -44,6 +26,11 @@ namespace IdentitySample.Controllers
             }
             Response.Cookies.Add(cookie);
             return RedirectToAction("Index", "Home");
-        } 
+        }
+
+        public ActionResult ChangeLanguage()
+        {
+            return View();
+        }
     }
 }

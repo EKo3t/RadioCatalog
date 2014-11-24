@@ -10,11 +10,12 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using RadioCatalog.Controllers;
 
 namespace IdentitySample.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class UsersAdminController : Controller
+    public class UsersAdminController : BaseController
     {
         public UsersAdminController()
         {
@@ -90,7 +91,12 @@ namespace IdentitySample.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = userViewModel.Email, Email = userViewModel.Email };
+                var user = new ApplicationUser
+                {
+                    NickName = userViewModel.NickName, 
+                    Email = userViewModel.Email,
+                    Address = userViewModel.Address,
+                };
                 var adminresult = await UserManager.CreateAsync(user, userViewModel.Password);
 
                 //Add User to the selected Roles 
@@ -140,6 +146,7 @@ namespace IdentitySample.Controllers
             {
                 Id = user.Id,
                 Email = user.Email,
+                Address =  user.Address,
                 RolesList = RoleManager.Roles.ToList().Select(x => new SelectListItem()
                 {
                     Selected = userRoles.Contains(x.Name),
@@ -163,8 +170,9 @@ namespace IdentitySample.Controllers
                     return HttpNotFound();
                 }
 
-                user.UserName = editUser.Email;
+                user.NickName = editUser.NickName;
                 user.Email = editUser.Email;
+                user.Address = editUser.Address;
 
                 var userRoles = await UserManager.GetRolesAsync(user.Id);
 

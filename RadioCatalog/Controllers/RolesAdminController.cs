@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Collections.Generic;
+using RadioCatalog.Controllers;
 
 namespace IdentitySample.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class RolesAdminController : Controller
+    public class RolesAdminController : BaseController
     {
         public RolesAdminController()
         {
@@ -98,7 +99,7 @@ namespace IdentitySample.Controllers
         {
             if (ModelState.IsValid)
             {
-                var role = new IdentityRole(roleViewModel.Name);
+                var role = new ApplicationRole(roleViewModel.Name);
                 var roleresult = await RoleManager.CreateAsync(role);
                 if (!roleresult.Succeeded)
                 {
