@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "UserProfile";
+}
+<h2>UserProfile</h2>
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="theme" type="text/css" title="default" href="@Url.Content("~/Content/bootstrap.min.css")">
+        <link rel="theme" type="text/css" title="supehero" href="@Url.Content("~/Content/themes/superhero.min.css")">
+        <link rel="theme" type="text/css" title="united" href="@Url.Content("~/Content/themes/united.min.css")">
+        <link rel="stylesheet" type="text/css" title="jquery-ui" href="@Url.Content("~/Content/themes/smoothness/jquery-ui.css")"> 
+        <script src="~/Scripts/jquery-ui-1.11.2.min.js"></script>       
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>       
+        <script src="~/Scripts/Themes/StyleSwitch.js"></script>    
+        <title>Tabs</title>
+        <script>
+            $(function () {
+                $("#tabs").tabs();
+            });
+        </script>
+    </head>
+    <body>
+        <div id="tabs">
+            <ul>
+                <li><a href="#tabs-1">User Editor</a></li>
+                <li><a href="#tabs-2">Detail Editor</a></li>
+                <li><a href="#tabs-3">Theme Edit</a></li>
+            </ul>
+            <div id="tabs-1">
+                <p>User list</p>
+                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    Html.ActionLink("RolesAdmin", "Index", "RolesAdmin");
+                    Html.ActionLink("UsersAdmin", "Index", "UsersAdmin");
+                }
+            </div>
+            <div id="tabs-2">
+            </div>
+            <div id="tabs-3">
+                <form>                  
+                    <input type="submit" onclick="switch_style('superhero');return false;" name="superhero_theme" value="superhero Theme" id="superhero_btn">
+                    <input type="submit" onclick="switch_style('united');return false;" name="unite_theme" value="united Theme" id="united_btn">
+                    <input type="submit" onclick="switch_style('default');return false;" name="default_theme" value="default Theme" id="default_btn">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

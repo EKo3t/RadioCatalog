@@ -125,8 +125,7 @@ namespace IdentitySample.Models
             InitializeIdentityForEF(context);
             base.Seed(context);
         }
-
-        //Create User=Admin@Admin.com with password=Admin@123456 in the Admin role        
+       
         public static void InitializeIdentityForEF(ApplicationDbContext db) {
             var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var roleManager = HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>();
