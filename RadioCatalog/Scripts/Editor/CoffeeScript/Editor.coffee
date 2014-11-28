@@ -1,9 +1,9 @@
 ﻿# CoffeeScript
 class Editor
-  init: (width, height) ->
+  init: ->
     canvas = new fabric.Canvas('editor')
-    canvas.width = width - 100
-    canvas.height = height - 100
-    return undefined
+    canvas.width = $(window).width()
+    canvas.height = $(window).height()
+    return canvas
 
 editor = new Editor()

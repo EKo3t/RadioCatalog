@@ -185,11 +185,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
+    <Content Include="Scripts\Editor\Editor.js" />
+    <Content Include="Scripts\fabric.js" />
     <Content Include="Scripts\jquery-ui-1.11.2.js" />
     <Content Include="Scripts\jquery-ui-1.11.2.min.js" />
     <Content Include="Scripts\Themes\StyleSwitch.js" />
     <Content Include="Views\Language\ChangeLanguage.cshtml" />
     <Content Include="Views\Account\UserProfile.cshtml" />
+    <Content Include="Scripts\Editor\CoffeeScript\Editor.coffee" />
+    <Content Include="Scripts\Editor\compileCoffeeToJS.bat" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -12,12 +12,14 @@
         <script src="~/Scripts/jquery-ui-1.11.2.min.js"></script>       
         <script src="~/Scripts/jquery-1.10.2.min.js"></script>       
         <script src="~/Scripts/Themes/StyleSwitch.js"></script>    
+        <script src="~/Scripts/Editor/Editor.js"></script> 
+        <script src="~/Scripts/fabric.js"></script> 
         <title>Tabs</title>
         <script>
             $(function () {
                 $("#tabs").tabs();
                 var width = $(window).width;
-                $("#tabs").css.width(width);
+                $('#tabs').css('width', width);
             });
         </script>
     </head>
@@ -37,6 +39,8 @@
                 }
             </div>
             <div id="tabs-2">
+                <canvas id="editor" width="10" height="10" style="border:1px solid #000000;"></canvas>
+                <script> editor.init() </script>
             </div>
             <div id="tabs-3">
                 <form>                  
