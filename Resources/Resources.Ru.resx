@@ -132,11 +132,17 @@
   <data name="ForgotPassword" xml:space="preserve">
     <value>Забыли пароль?</value>
   </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Привет</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Домашняя страница</value>
   </data>
   <data name="Login_" xml:space="preserve">
     <value>Войти</value>
+  </data>
+  <data name="LogOff" xml:space="preserve">
+    <value>Выйти</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Зарегестрироваться</value>
@@ -146,5 +152,8 @@
   </data>
   <data name="UseLocalAcc" xml:space="preserve">
     <value>Используйте вашу учетную запись, чтобы войти.</value>
+  </data>
+  <data name="UserProfile" xml:space="preserve">
+    <value>Профиль</value>
   </data>
 </root>
