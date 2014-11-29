@@ -145,6 +145,41 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Themes\MSN_Blue\default.css" />
+    <Content Include="App_Themes\MSN_Blue\Images\bar.JPG" />
+    <Content Include="App_Themes\MSN_Blue\Images\bullet.JPG" />
+    <Content Include="App_Themes\MSN_Blue\Images\logo.JPG" />
+    <Content Include="App_Themes\MSN_Blue\menuicon.JPG" />
+    <Content Include="App_Themes\MSN_CherryBlossom\default.css" />
+    <Content Include="App_Themes\MSN_CherryBlossom\Images\bar.JPG" />
+    <Content Include="App_Themes\MSN_CherryBlossom\Images\bullet.JPG" />
+    <Content Include="App_Themes\MSN_CherryBlossom\Images\logo.JPG" />
+    <Content Include="App_Themes\MSN_Finance\default.css" />
+    <Content Include="App_Themes\MSN_Finance\Images\bar.JPG" />
+    <Content Include="App_Themes\MSN_Finance\Images\bullet.JPG" />
+    <Content Include="App_Themes\MSN_Finance\Images\logo.JPG" />
+    <Content Include="App_Themes\MSN_Morning\default.css" />
+    <Content Include="App_Themes\MSN_Morning\Images\bar.JPG" />
+    <Content Include="App_Themes\MSN_Morning\Images\bullet.JPG" />
+    <Content Include="App_Themes\MSN_Morning\Images\logo.JPG" />
+    <Content Include="App_Themes\MSN_Purple\default.css" />
+    <Content Include="App_Themes\MSN_Purple\Images\bar.JPG" />
+    <Content Include="App_Themes\MSN_Purple\Images\bullet.JPG" />
+    <Content Include="App_Themes\MSN_Purple\Images\logo.JPG" />
+    <Content Include="App_Themes\MSN_Red\default.css" />
+    <Content Include="App_Themes\MSN_Red\Images\bar.JPG" />
+    <Content Include="App_Themes\MSN_Red\Images\bullet.JPG" />
+    <Content Include="App_Themes\MSN_Red\Images\logo.JPG" />
+    <Content Include="App_Themes\WinXP_Blue\default.css" />
+    <Content Include="App_Themes\WinXP_Blue\Images\bar.JPG" />
+    <Content Include="App_Themes\WinXP_Blue\Images\bullet.JPG" />
+    <Content Include="App_Themes\WinXP_Blue\Images\go.gif" />
+    <Content Include="App_Themes\WinXP_Blue\Images\logo.JPG" />
+    <Content Include="App_Themes\WinXP_Blue\Images\logoNew.gif" />
+    <Content Include="App_Themes\WinXP_Silver\default.css" />
+    <Content Include="App_Themes\WinXP_Silver\Images\bar.JPG" />
+    <Content Include="App_Themes\WinXP_Silver\Images\bullet.JPG" />
+    <Content Include="App_Themes\WinXP_Silver\Images\logo.JPG" />
     <Content Include="Content\Images\a-aMgeyIQuI.jpg" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -195,6 +230,16 @@
     <Content Include="Views\Account\UserProfile.cshtml" />
     <Content Include="Scripts\Editor\CoffeeScript\Editor.coffee" />
     <Content Include="Scripts\Editor\compileCoffeeToJS.bat" />
+    <Content Include="Views\Theme\ChangeTheme.cshtml" />
+    <Content Include="App_Themes\MSN_Blue\default.skin" />
+    <Content Include="App_Themes\MSN_CherryBlossom\default.skin" />
+    <Content Include="App_Themes\MSN_Finance\default.skin" />
+    <Content Include="App_Themes\MSN_Morning\default.skin" />
+    <Content Include="App_Themes\MSN_Purple\default.skin" />
+    <Content Include="App_Themes\MSN_Red\default.skin" />
+    <Content Include="App_Themes\WinXP_Blue\default.skin" />
+    <Content Include="App_Themes\WinXP_Blue\Images\Thumbs.db" />
+    <Content Include="App_Themes\WinXP_Silver\default.skin" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -278,6 +323,7 @@
     <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
+    <Compile Include="Controllers\ThemeController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -287,6 +333,7 @@
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ThemeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

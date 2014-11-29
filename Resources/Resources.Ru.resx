@@ -171,4 +171,7 @@
   <data name="UsersAdmin" xml:space="preserve">
     <value>Управление пользователями</value>
   </data>
+  <data name="ChangeTheme" xml:space="preserve">
+    <value>Сменить тему</value>
+  </data>
 </root>

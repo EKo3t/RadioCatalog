@@ -23,6 +23,7 @@
                     <li>@Html.ActionLink(@Resources.About, "About", "Home")</li>
                     <li>@Html.ActionLink(@Resources.Contact, "Contact", "Home")</li>
                     <li>@Html.ActionLink(@Resources.ChangeLanguage, "ChangeLanguage", "Language")</li>
+                    <li>@Html.ActionLink(@Resources.ChangeTheme, "ChangeTheme", "Theme")</li>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink(@Resources.UserProfile, "UserProfile", "Account")</li>
