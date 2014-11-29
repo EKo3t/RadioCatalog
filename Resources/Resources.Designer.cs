@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Back to profile.
+        /// </summary>
+        public static string BackToProfile {
+            get {
+                return ResourceManager.GetString("BackToProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Change language.
         /// </summary>
         public static string ChangeLanguage {
@@ -142,6 +151,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Password.
+        /// </summary>
+        public static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Register.
         /// </summary>
         public static string Register {
@@ -160,6 +178,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Remember me?.
+        /// </summary>
+        public static string RememberMe {
+            get {
+                return ResourceManager.GetString("RememberMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Role management.
+        /// </summary>
+        public static string RolesAdmin {
+            get {
+                return ResourceManager.GetString("RolesAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Use a local account to log in..
         /// </summary>
         public static string UseLocalAcc {
@@ -174,6 +210,15 @@ namespace Resources {
         public static string UserProfile {
             get {
                 return ResourceManager.GetString("UserProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на User management.
+        /// </summary>
+        public static string UsersAdmin {
+            get {
+                return ResourceManager.GetString("UsersAdmin", resourceCulture);
             }
         }
     }

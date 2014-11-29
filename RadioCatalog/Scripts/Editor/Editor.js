@@ -5,10 +5,35 @@ Editor = (function() {
   function Editor() {}
 
   Editor.prototype.init = function() {
-    var canvas;
+    var canvas, ctx, handleImage, imageLoader;
     canvas = new fabric.Canvas('editor');
     canvas.width = $(window).width();
     canvas.height = $(window).height();
+    handleImage = function(e) {
+      var reader;
+      reader = new FileReader();
+      reader.onload = function(event) {
+        var img;
+        img = new Image();
+        img.src = event.target.result;
+        return img.onload = function() {
+          var image;
+          image = new fabric.Image(img);
+          image.set({
+            angle: 0,
+            padding: 10,
+            cornersize: 10
+          });
+          canvas.centerObject(image);
+          canvas.add(image);
+          return canvas.renderAll();
+        };
+      };
+      return reader.readAsDataURL(e.target.files[0]);
+    };
+    imageLoader = document.getElementById("uploadImg");
+    imageLoader.addEventListener("change", handleImage, false);
+    return ctx = canvas.getContext("2d");
   };
 
   return Editor;

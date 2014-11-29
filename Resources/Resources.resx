@@ -156,4 +156,19 @@
   <data name="UserProfile" xml:space="preserve">
     <value>Profile</value>
   </data>
+  <data name="BackToProfile" xml:space="preserve">
+    <value>Back to profile</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Remember me?</value>
+  </data>
+  <data name="RolesAdmin" xml:space="preserve">
+    <value>Role management</value>
+  </data>
+  <data name="UsersAdmin" xml:space="preserve">
+    <value>User management</value>
+  </data>
 </root>

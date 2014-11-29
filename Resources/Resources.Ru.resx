@@ -156,4 +156,19 @@
   <data name="UserProfile" xml:space="preserve">
     <value>Профиль</value>
   </data>
+  <data name="BackToProfile" xml:space="preserve">
+    <value>Вернуться к профилю</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Запомнить меня?</value>
+  </data>
+  <data name="RolesAdmin" xml:space="preserve">
+    <value>Управление ролями</value>
+  </data>
+  <data name="UsersAdmin" xml:space="preserve">
+    <value>Управление пользователями</value>
+  </data>
 </root>

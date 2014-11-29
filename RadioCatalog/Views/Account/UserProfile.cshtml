@@ -30,15 +30,18 @@
                 <li><a href="#tabs-2">Detail Editor</a></li>
                 <li><a href="#tabs-3">Theme Edit</a></li>
             </ul>
-            <div id="tabs-1">
-                <p>User list</p>
-                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-                {
-                    Html.ActionLink("RolesAdmin", "Index", "RolesAdmin");
-                    Html.ActionLink("UsersAdmin", "Index", "UsersAdmin");
-                }
-            </div>
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <div id="tabs-1">
+                    <h5>@Html.ActionLink(@Resources.RolesAdmin, "Index", "RolesAdmin")</h5>
+                    <h5>@Html.ActionLink(@Resources.UsersAdmin, "Index", "UsersAdmin")</h5>
+                </div>
+            }
+                   
             <div id="tabs-2">
+                <form id="uploadImg">
+                    <input type="file" id="uploadedImg" name="imageLoader"/>
+                </form>
                 <canvas id="editor" width="800" height="600" style="border:1px solid #000000;"></canvas>
                 <script> editor.init() </script>
             </div>
