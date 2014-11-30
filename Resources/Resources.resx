@@ -174,4 +174,7 @@
   <data name="ChangeTheme" xml:space="preserve">
     <value>Change theme</value>
   </data>
+  <data name="AddWire" xml:space="preserve">
+    <value>Add_wire</value>
+  </data>
 </root>

@@ -16,7 +16,9 @@ namespace RadioCatalog.Models
 
         public ThemeModel(string theme)
         {
-            ThemeModel();
+            Items = new List<string>();
+            Items.Add("MSN_Blue");
+            Items.Add("MSN_CherryBlossom");
 
             CurrentItem = theme;
         }

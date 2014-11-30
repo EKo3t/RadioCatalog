@@ -174,4 +174,7 @@
   <data name="ChangeTheme" xml:space="preserve">
     <value>Сменить тему</value>
   </data>
+  <data name="AddWire" xml:space="preserve">
+    <value>Добавить_провод</value>
+  </data>
 </root>

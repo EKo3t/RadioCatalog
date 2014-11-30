@@ -8,7 +8,7 @@ namespace RadioCatalog.Controllers
 {
     public class ThemeController : Controller
     {
-        ThemeModel model = new Models.ThemeModel();
+        Models.ThemeModel model = new Models.ThemeModel();
         const string cookieName = "_theme";
 
         public ActionResult SetTheme(string theme)

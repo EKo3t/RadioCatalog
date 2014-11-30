@@ -4,11 +4,8 @@ var Editor, editor;
 Editor = (function() {
   function Editor() {}
 
-  Editor.prototype.init = function() {
-    var canvas, ctx, handleImage, imageLoader;
-    canvas = new fabric.Canvas('editor');
-    canvas.width = $(window).width();
-    canvas.height = $(window).height();
+  Editor.prototype.addImageLoadEvent = function(canvas) {
+    var ctx, handleImage, imageLoader;
     handleImage = function(e) {
       var reader;
       reader = new FileReader();
@@ -34,6 +31,53 @@ Editor = (function() {
     imageLoader = document.getElementById("uploadImg");
     imageLoader.addEventListener("change", handleImage, false);
     return ctx = canvas.getContext("2d");
+  };
+
+  Editor.prototype.addWireDrawing = function() {
+    return editor.wireDrawing = true;
+  };
+
+  Editor.prototype.makeLine = function(coords) {
+    return new fabric.Line(coords, {
+      fill: 'black',
+      stroke: 'black',
+      strokeWidth: 2,
+      selectable: false
+    });
+  };
+
+  Editor.prototype.init = function() {
+    var canvas;
+    canvas = new fabric.Canvas('editor', {
+      selection: false
+    });
+    canvas.width = $(window).width();
+    canvas.height = $(window).height();
+    canvas.on('mouse:up', function(options) {
+      var diffX, diffY, line, pointer;
+      if (editor.wireDrawing === true) {
+        pointer = canvas.getPointer(options.e);
+        if ((editor.prevX !== void 0) && (editor.prevY !== void 0)) {
+          diffX = Math.abs(editor.prevX - pointer.x);
+          diffY = Math.abs(editor.prevY - pointer.y);
+          if (diffX < diffY) {
+            line = editor.makeLine([editor.prevX, editor.prevY, editor.prevX, pointer.y]);
+            editor.prevY = pointer.y;
+          }
+          if (diffX >= diffY) {
+            line = editor.makeLine([editor.prevX, editor.prevY, pointer.x, editor.prevY]);
+            editor.prevX = pointer.x;
+          }
+          canvas.add(line);
+          canvas.renderAll();
+        }
+        if ((editor.prevX === void 0) && (editor.prevY === void 0)) {
+          editor.prevX = pointer.x;
+          return editor.prevY = pointer.y;
+        }
+      }
+    });
+    return this.addImageLoadEvent(canvas);
   };
 
   return Editor;
