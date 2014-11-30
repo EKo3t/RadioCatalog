@@ -11,17 +11,18 @@ namespace RadioCatalog.Controllers
         Models.ThemeModel model = new Models.ThemeModel();
         const string cookieName = "_theme";
 
-        public ActionResult SetTheme(string theme)
+        public ActionResult SetTheme(string CurrentItem)
         {
-            model.CurrentItem = theme;
+            model.CurrentItem = CurrentItem;
+            HttpContext.Application["Theme"] = CurrentItem;
 
             HttpCookie cookie = Request.Cookies[cookieName];
             if (cookie != null)
-                cookie.Value = theme;
+                cookie.Value = CurrentItem;
             else
             {
                 cookie = new HttpCookie(cookieName);
-                cookie.Value = theme;
+                cookie.Value = CurrentItem;
                 cookie.Expires = DateTime.Now.AddYears(1);
             }
             Response.Cookies.Add(cookie);
