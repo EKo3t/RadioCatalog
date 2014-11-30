@@ -4,7 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css "))
+    @{
+        if (HttpContext.Current.Application["Theme"] == null) {
+            HttpContext.Current.Application["Theme"] = "css";
+        }
+    }
+    @Styles.Render("~/Themes/" + HttpContext.Current.Application["Theme"])
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body onload="set_style_from_cookie()">

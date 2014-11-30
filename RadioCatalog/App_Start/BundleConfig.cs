@@ -40,6 +40,16 @@ namespace IdentitySample
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Themes/MSN_Blue").Include(
+                "~/App_Themes/MSN_Blue/default.css"
+                )
+            );
+
+            bundles.Add(new StyleBundle("~/Themes/MSN_CherryBlossom").Include(
+                "~/App_Themes/MSN_CherryBlossom/default.css"
+                )
+            );
         }
     }
 }

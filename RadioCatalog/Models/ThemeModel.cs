@@ -9,19 +9,24 @@ namespace RadioCatalog.Models
     {
         public ThemeModel()
         {
-            Items = new List<string>();
-            Items.Add("MSN_Blue");
-            Items.Add("MSN_CherryBlossom");
+            FillList();
         }
 
         public ThemeModel(string theme)
         {
-            ThemeModel();
+            FillList();
 
             CurrentItem = theme;
         }
 
-        public List<string> Items { get; set; }
+        public void FillList()
+        {
+            Items = new List<object>();
+            Items.Add(new KeyValuePair<string, string>("MSN_Blue", "MSN Blue"));
+            Items.Add(new KeyValuePair<string, string>("MSN_CherryBlossom","MSN CherryBlossom"));
+        }
+
+        public List<object> Items { get; set; }
         public string CurrentItem { get; set; }
     }
 }
