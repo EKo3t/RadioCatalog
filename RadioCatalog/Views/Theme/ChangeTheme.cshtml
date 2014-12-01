@@ -12,10 +12,10 @@
 </head>
 <body>
     <div>
-        @Html.BeginForm("SetTheme", "Theme")
-        {
-            @Html.Label(@Resources.ChangeTheme);
-            @Html.DropDownListFor(model => model.CurrentItem, new SelectList(Model.Items, "Key", "Value"), new {@id="theme", @name="theme"});
+        @using (@Html.BeginForm("SetTheme", "Theme"))
+        { 
+            @Html.Label(@Resources.ChangeTheme)
+            @Html.DropDownListFor(model => model.CurrentItem, new SelectList(Model.Items, "Key", "Value"), new {@id="theme", @name="theme"})
             <input type="submit" value="Change">
         }
     </div>

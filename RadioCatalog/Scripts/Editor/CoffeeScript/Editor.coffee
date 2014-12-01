@@ -13,7 +13,7 @@ class Editor
             padding: 10,
             cornersize:10,
           })
-          image.setCoords(100,100);
+          image.setCoords(0,0);
           canvas.add(image);
           canvas.renderAll();
       reader.readAsDataURL e.target.files[0]
@@ -52,11 +52,11 @@ class Editor
     
 
   init: ->
-    canvas = new fabric.Canvas('editor', 
+    @canvas = new fabric.Canvas('editor', 
       selection: false)
-    canvas.width = $(window).width()
-    canvas.height = $(window).height()
-    canvas.forEachObject( (obj) ->
+    @canvas.width = $(window).width()
+    @canvas.height = $(window).height()
+    @canvas.forEachObject( (obj) ->
       obj.on('selected', () ->
         console.log("test")
         if (editor.binding == true)
@@ -68,6 +68,9 @@ class Editor
       for element in obj1.bindedObj
         @createLines()
     )
-    @addImageLoadEvent(canvas)
+    @addImageLoadEvent(@canvas)
+
+$(document).ready ->
+  editor.canvas.calcOffset.bind(editor.canvas)
 
 editor = new Editor()
