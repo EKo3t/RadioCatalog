@@ -21,7 +21,7 @@ Editor = (function() {
             padding: 10,
             cornersize: 10
           });
-          image.setCoords(100, 100);
+          image.setCoords(0, 0);
           canvas.add(image);
           return canvas.renderAll();
         };
@@ -76,13 +76,12 @@ Editor = (function() {
   Editor.prototype.createLines = function() {};
 
   Editor.prototype.init = function() {
-    var canvas;
-    canvas = new fabric.Canvas('editor', {
+    this.canvas = new fabric.Canvas('editor', {
       selection: false
     });
-    canvas.width = $(window).width();
-    canvas.height = $(window).height();
-    canvas.forEachObject(function(obj) {
+    this.canvas.width = $(window).width();
+    this.canvas.height = $(window).height();
+    this.canvas.forEachObject(function(obj) {
       var element, _i, _len, _ref, _results;
       obj.on('selected', function() {
         console.log("test");
@@ -103,11 +102,29 @@ Editor = (function() {
       }
       return _results;
     });
-    return this.addImageLoadEvent(canvas);
+    return this.addImageLoadEvent(this.canvas);
+  };
+
+  Editor.prototype.save = function() {
+    var jsonString;
+    jsonString = document.getElementById("jsonString");
+    jsonString.value = JSON.stringify(this.canvas);
+    return document.getElementById("saveImg").submit();
+  };
+
+  Editor.prototype.load = function() {
+    var jsonString;
+    jsonString = document.getElementById("jsonString");
+    return this.canvas.loadFromJSON(decodeURI(jsonString.value));
   };
 
   return Editor;
 
 })();
+
+$(document).ready(function() {
+  editor.canvas.calcOffset.bind(editor.canvas);
+  return editor.load();
+});
 
 editor = new Editor();

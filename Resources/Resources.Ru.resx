@@ -180,4 +180,10 @@
   <data name="AddBind" xml:space="preserve">
     <value>Добавить_связь</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="Load" xml:space="preserve">
+    <value>Загрузить</value>
+  </data>
 </root>

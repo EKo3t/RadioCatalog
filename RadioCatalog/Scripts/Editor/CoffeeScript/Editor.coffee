@@ -69,8 +69,18 @@ class Editor
         @createLines()
     )
     @addImageLoadEvent(@canvas)
+  
+  save: ->
+    jsonString = document.getElementById("jsonString")
+    jsonString.value = JSON.stringify(@canvas);
+    document.getElementById("saveImg").submit();
+    
+  load: ->
+    jsonString = document.getElementById("jsonString")
+    @canvas.loadFromJSON(decodeURI(jsonString.value));
 
 $(document).ready ->
   editor.canvas.calcOffset.bind(editor.canvas)
+  editor.load()
 
 editor = new Editor()

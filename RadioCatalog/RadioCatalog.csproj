@@ -323,15 +323,18 @@
     <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
+    <Compile Include="Controllers\SchemeController.cs" />
     <Compile Include="Controllers\ThemeController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CultureHelper.cs" />
+    <Compile Include="Helpers\HtmlHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ThemeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -339,6 +342,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Scheme\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Resources\Resources.csproj">

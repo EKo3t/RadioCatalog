@@ -180,4 +180,10 @@
   <data name="AddBind" xml:space="preserve">
     <value>Add_bind</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Load" xml:space="preserve">
+    <value>Load</value>
+  </data>
 </root>

@@ -1,5 +1,13 @@
-﻿@{
+﻿@model RadioCatalog.Models.ImageModel
+@{
     ViewBag.Title = "UserProfile";
+}
+@helper getSchemeText()
+{
+    if (@Model != null)
+    {
+        @:value = "@Model.CurrentScheme";
+    }
 }
 <h2>UserProfile</h2>
 <!DOCTYPE html>
@@ -44,7 +52,12 @@
                 </form>
                 <input type="button" id="addWire" value=@Resources.AddWire name="addWire" onclick="editor.addWireDrawing()"/>
                 <input type="button" id="addBind" value=@Resources.AddBind name="addBind" onclick="editor.addBinding()"/>
-                <input type="button" id="save" value=@Resources.AddBind name="save" onclick="editor.save()"/>
+                @using (@Html.BeginForm("Save", "Scheme", FormMethod.Get, new { name="saveImg", id="saveImg" }))
+                {
+                    <input type="hidden" id="jsonString" name="jsonString" @getSchemeText() /> <!--value="@RadioCatalog.Helpers.HtmlHelper.getSchemeText(@Model)"-->
+                    <input type="button" id="save" value=@Resources.Save name="save" onclick="editor.save()" />
+                    <input type="button" id="load" value=@Resources.Load name="load" onclick="editor.load()" />
+                }
                 <canvas id="editor" width="800" height="600" style="border:1px solid #000000;"></canvas>
                 <script> editor.init() </script>
             </div>
