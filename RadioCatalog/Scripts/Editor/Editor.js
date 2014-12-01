@@ -21,6 +21,11 @@ Editor = (function() {
             padding: 10,
             cornersize: 10
           });
+          editor.AddSelectEventForObject(image);
+          editor.AddMoveEventForObject(image);
+          if (image.type === void 0) {
+            image.type = "image";
+          }
           canvas.centerObject(image);
           canvas.add(image);
           return canvas.renderAll();
@@ -50,13 +55,11 @@ Editor = (function() {
     return editor.binding = true;
   };
 
-  Editor.prototype.addObjBinding = function(obj1, obj2) {
+  Editor.prototype.AddObjBinding = function(obj1, obj2) {
     var element, flag, _i, _len, _ref;
-    if (obj1.bindCount === void 0) {
-      obj1.bindCount = 1;
-    }
     if (obj1.bindedObj === void 0) {
-      obj1.bindedObj = new fabric.group(obj2);
+      obj1.bindedObj = new fabric.Group();
+      obj1.bindedObj.add(obj2);
     }
     if (obj1.bindedObj !== void 0) {
       flag = false;
@@ -73,36 +76,69 @@ Editor = (function() {
     }
   };
 
-  Editor.prototype.createLines = function() {};
+  Editor.prototype.CreateGroupOfLines = function(point1, point2) {
+    var group, line;
+    group = new fabric.Group();
+    line = editor.makeLine([point1.x, point1.y, point2.x, point1.y]);
+    group.add(line);
+    line = editor.makeLine([point2.x, point1.y, point2.x, point2.y]);
+    group.add(line);
+    return group;
+  };
+
+  Editor.prototype.CreateLines = function(obj1, obj2) {
+    var dist, element1, element2, group, min, minElement1, minElement2, _i, _j, _len, _len1, _ref, _ref1;
+    obj1.middlePoint = new Array(obj1.mt, obj1.ml, obj1.mr, obj1.mb);
+    obj2.middlePoint = new Array(obj2.mt, obj2.ml, obj2.mr, obj2.mb);
+    min = Infinity;
+    _ref = obj1.middlePoint;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      element1 = _ref[_i];
+      _ref1 = obj2.middlePoint;
+      for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+        element2 = _ref1[_j];
+        dist = Math.pow(element1.x - element2.x, 2) + Math.pow(element1.y - element2.y, 2);
+        if (dist < min) {
+          min = dist;
+          minElement1 = element1;
+          minElement2 = element2;
+        }
+      }
+    }
+    if ((minElement1 !== void 0) && (minElement2 !== void 0)) {
+      return group = editor.CreateGroupOfLines(minElement1, minElement2);
+    }
+  };
+
+  Editor.prototype.AddSelectEventForObject = function(obj) {
+    return obj.on('selected', function() {
+      if (editor.binding === true) {
+        if (editor.groupObj !== void 0) {
+          editor.groupObj.add(obj);
+          editor.AddObjBinding(editor.groupObj.item(0), editor.groupObj.item(1));
+          editor.lineGroup = new fabric.Group();
+          editor.lineGroup.add(editor.CreateLines(editor.groupObj.item(0).oCoords, editor.groupObj.item(1).oCoords));
+          editor.lineGroup.name = "lines";
+          editor.lineGroup.selectable = false;
+          editor.canvas.add(editor.lineGroup);
+          editor.canvas.renderAll();
+          editr.groupObj = void 0;
+        }
+        if (editor.groupObj === void 0) {
+          editor.groupObj = new fabric.Group();
+          return editor.groupObj.add(obj);
+        }
+      }
+    });
+  };
 
   Editor.prototype.init = function() {
-    var canvas;
-    canvas = new fabric.Canvas('editor', {
+    this.canvas = new fabric.Canvas('editor', {
       selection: false
     });
-    canvas.width = $(window).width();
-    canvas.height = $(window).height();
-    canvas.forEachObject(function(obj) {
-      var element, _i, _len, _ref, _results;
-      obj.on('selected', function() {
-        if (editor.binding === true) {
-          if (editor.groupObj === void 0) {
-            editor.groupObj = new fabric.group(obj);
-          }
-          if (editor.groupObj.count === 2) {
-            return addObjBinding(editor.groupObj[0], editor.groupObj[1]);
-          }
-        }
-      });
-      _ref = obj1.bindedObj;
-      _results = [];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        element = _ref[_i];
-        _results.push(this.createLines());
-      }
-      return _results;
-    });
-    return this.addImageLoadEvent(canvas);
+    this.canvas.width = $(window).width();
+    this.canvas.height = $(window).height();
+    return this.addImageLoadEvent(this.canvas);
   };
 
   return Editor;
