@@ -17,7 +17,6 @@ class Editor
           editor.AddMoveEventForObject(image)
           if (image.type == undefined)
             image.type = "image"
-          canvas.centerObject(image);
           image.setCoords(0,0);
           canvas.add(image);
           canvas.renderAll();
@@ -25,9 +24,6 @@ class Editor
     imageLoader = document.getElementById("uploadImg")
     imageLoader.addEventListener "change", handleImage, false
     ctx = canvas.getContext("2d")
-
-  addWireDrawing: ->
-    editor.wireDrawing = true
 
   makeLine: (coords) ->
     new fabric.Line(coords,  
@@ -54,7 +50,6 @@ class Editor
 
   CreateGroupOfLines: (point1, point2) ->
     group = new fabric.Group()
-    
     line = editor.makeLine([point1.x, point1.y, point2.x, point1.y])
     group.add(line)
     line = editor.makeLine([point2.x, point1.y, point2.x, point2.y])
@@ -83,24 +78,38 @@ class Editor
           editor.groupObj.add(obj)
           editor.AddObjBinding(editor.groupObj.item(0), editor.groupObj.item(1))
           editor.lineGroup = new fabric.Group()
-          editor.lineGroup.add(editor.CreateLines(editor.groupObj.item(0).oCoords, editor.groupObj.item(1).oCoords))
+          editor.lineGroup.obj1 = editor.groupObj.item(0)
+          editor.lineGroup.obj2 = editor.groupObj.item(1)
+          editor.lineGroup.add(editor.CreateLines(editor.lineGroup.obj1.oCoords, editor.lineGroup.obj2.oCoords))
           editor.lineGroup.name = "lines"
           editor.lineGroup.selectable = false
           editor.canvas.add(editor.lineGroup)
           editor.canvas.renderAll()
-          editr.groupObj = undefined
+          editor.groupObj = undefined
+          editor.binding = false
         if (editor.groupObj == undefined)
           editor.groupObj = new fabric.Group()
           editor.groupObj.add(obj)
     )
 
   AddMoveEventForObject: (obj) ->
-    obj.on('move', () -> 
-      for element in editor.canvas
-        
+    obj.on('moving', () ->
+      obj.moving = true)
+    obj.on('rotating', () ->
+      obj.moving = true)
+    obj.on('scaling', () ->
+      obj.moving = true)
+    obj.on('mouseup', () -> 
+      if (obj.moving == true)
+        obj.moving = false
+        for element in editor.canvas._objects
+          if (element.name == "lines")
+            element.remove(element.item(0))
+            element.remove(element.item(1))
+            element.add(editor.CreateLines(element.obj1.oCoords, element.obj2.oCoords))
+            editor.canvas.renderAll()    
     )
       
-
   init: ->
     @canvas = new fabric.Canvas('editor', 
       selection: false)
