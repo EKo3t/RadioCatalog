@@ -1,0 +1,23 @@
+﻿@model RadioCatalog.Models.ThemeModel
+@{
+    ViewBag.Title = @Resources.ChangeTheme;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        @using (@Html.BeginForm("SetTheme", "Theme"))
+        { 
+            @Html.Label(@Resources.ChangeTheme)
+            @Html.DropDownListFor(model => model.CurrentItem, new SelectList(Model.Items, "Key", "Value"), new {@id="theme", @name="theme"})
+            <input type="submit" value="Change">
+        }
+    </div>
+</body>
+</html>

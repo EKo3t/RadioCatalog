@@ -27,6 +27,7 @@ Editor = (function() {
             image.type = "image";
           }
           canvas.centerObject(image);
+          image.setCoords(100, 100);
           canvas.add(image);
           return canvas.renderAll();
         };
@@ -102,6 +103,25 @@ Editor = (function() {
           min = dist;
           minElement1 = element1;
           minElement2 = element2;
+
+  Editor.prototype.init = function() {
+    var canvas;
+    canvas = new fabric.Canvas('editor', {
+      selection: false
+    });
+    canvas.width = $(window).width();
+    canvas.height = $(window).height();
+    canvas.forEachObject(function(obj) {
+      var element, _i, _len, _ref, _results;
+      obj.on('selected', function() {
+        console.log("test");
+        if (editor.binding === true) {
+          if (editor.groupObj === void 0) {
+            editor.groupObj = new fabric.group(obj);
+          }
+          if (editor.groupObj.count === 2) {
+            return addObjBinding(editor.groupObj[0], editor.groupObj[1]);
+          }
         }
       }
     }
