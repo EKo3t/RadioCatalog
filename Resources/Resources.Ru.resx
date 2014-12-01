@@ -177,4 +177,7 @@
   <data name="AddWire" xml:space="preserve">
     <value>Добавить_провод</value>
   </data>
+  <data name="AddBind" xml:space="preserve">
+    <value>Добавить_связь</value>
+  </data>
 </root>

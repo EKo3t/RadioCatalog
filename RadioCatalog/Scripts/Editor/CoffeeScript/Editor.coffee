@@ -32,29 +32,41 @@ class Editor
       selectable: false
     )
 
+  addBinding: ->
+    editor.binding = true
+
+  addObjBinding: (obj1, obj2) ->
+    if (obj1.bindCount == undefined)
+      obj1.bindCount = 1
+    if (obj1.bindedObj == undefined)
+      obj1.bindedObj = new fabric.group(obj2)
+    if (obj1.bindedObj != undefined)
+      flag = false
+      for element in obj1.bindedObj
+        if (element == obj2)
+          flag = true
+      if (flag == false)
+        obj1.bindedObj.add(obj2)
+
+  createLines: ->
+    
+
   init: ->
     canvas = new fabric.Canvas('editor', 
       selection: false)
     canvas.width = $(window).width()
     canvas.height = $(window).height()
-    canvas.on('mouse:up', (options) ->
-      if (editor.wireDrawing == true)
-        pointer = canvas.getPointer(options.e)
-        if ((editor.prevX != undefined) && (editor.prevY != undefined)) 
-          diffX = Math.abs(editor.prevX - pointer.x)
-          diffY = Math.abs(editor.prevY - pointer.y)
-          if (diffX < diffY)
-            line = editor.makeLine([editor.prevX, editor.prevY, editor.prevX, pointer.y])
-            editor.prevY = pointer.y
-          if (diffX >= diffY)
-            line = editor.makeLine([editor.prevX, editor.prevY, pointer.x, editor.prevY])
-            editor.prevX = pointer.x
-          canvas.add(line)
-          canvas.renderAll()
-        if ((editor.prevX == undefined) && (editor.prevY == undefined)) 
-          editor.prevX = pointer.x
-          editor.prevY = pointer.y
-    )    
+    canvas.forEachObject( (obj) ->
+      obj.on('selected', () ->
+        if (editor.binding == true)
+          if (editor.groupObj == undefined)
+            editor.groupObj = new fabric.group(obj)
+          if (editor.groupObj.count == 2)
+            addObjBinding(editor.groupObj[0], editor.groupObj[1])
+      )
+      for element in obj1.bindedObj
+        @createLines()
+    )
     @addImageLoadEvent(canvas)
 
 editor = new Editor()

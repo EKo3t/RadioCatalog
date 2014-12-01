@@ -177,4 +177,7 @@
   <data name="AddWire" xml:space="preserve">
     <value>Add_wire</value>
   </data>
+  <data name="AddBind" xml:space="preserve">
+    <value>Add_bind</value>
+  </data>
 </root>

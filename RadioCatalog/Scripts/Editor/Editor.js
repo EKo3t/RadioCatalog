@@ -46,6 +46,35 @@ Editor = (function() {
     });
   };
 
+  Editor.prototype.addBinding = function() {
+    return editor.binding = true;
+  };
+
+  Editor.prototype.addObjBinding = function(obj1, obj2) {
+    var element, flag, _i, _len, _ref;
+    if (obj1.bindCount === void 0) {
+      obj1.bindCount = 1;
+    }
+    if (obj1.bindedObj === void 0) {
+      obj1.bindedObj = new fabric.group(obj2);
+    }
+    if (obj1.bindedObj !== void 0) {
+      flag = false;
+      _ref = obj1.bindedObj;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        element = _ref[_i];
+        if (element === obj2) {
+          flag = true;
+        }
+      }
+      if (flag === false) {
+        return obj1.bindedObj.add(obj2);
+      }
+    }
+  };
+
+  Editor.prototype.createLines = function() {};
+
   Editor.prototype.init = function() {
     var canvas;
     canvas = new fabric.Canvas('editor', {
@@ -53,29 +82,25 @@ Editor = (function() {
     });
     canvas.width = $(window).width();
     canvas.height = $(window).height();
-    canvas.on('mouse:up', function(options) {
-      var diffX, diffY, line, pointer;
-      if (editor.wireDrawing === true) {
-        pointer = canvas.getPointer(options.e);
-        if ((editor.prevX !== void 0) && (editor.prevY !== void 0)) {
-          diffX = Math.abs(editor.prevX - pointer.x);
-          diffY = Math.abs(editor.prevY - pointer.y);
-          if (diffX < diffY) {
-            line = editor.makeLine([editor.prevX, editor.prevY, editor.prevX, pointer.y]);
-            editor.prevY = pointer.y;
+    canvas.forEachObject(function(obj) {
+      var element, _i, _len, _ref, _results;
+      obj.on('selected', function() {
+        if (editor.binding === true) {
+          if (editor.groupObj === void 0) {
+            editor.groupObj = new fabric.group(obj);
           }
-          if (diffX >= diffY) {
-            line = editor.makeLine([editor.prevX, editor.prevY, pointer.x, editor.prevY]);
-            editor.prevX = pointer.x;
+          if (editor.groupObj.count === 2) {
+            return addObjBinding(editor.groupObj[0], editor.groupObj[1]);
           }
-          canvas.add(line);
-          canvas.renderAll();
         }
-        if ((editor.prevX === void 0) && (editor.prevY === void 0)) {
-          editor.prevX = pointer.x;
-          return editor.prevY = pointer.y;
-        }
+      });
+      _ref = obj1.bindedObj;
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        element = _ref[_i];
+        _results.push(this.createLines());
       }
+      return _results;
     });
     return this.addImageLoadEvent(canvas);
   };

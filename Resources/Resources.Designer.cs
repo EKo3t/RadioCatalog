@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Add_bind.
+        /// </summary>
+        public static string AddBind {
+            get {
+                return ResourceManager.GetString("AddBind", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Add_wire.
         /// </summary>
         public static string AddWire {
