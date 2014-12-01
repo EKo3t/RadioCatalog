@@ -21,7 +21,7 @@ Editor = (function() {
             padding: 10,
             cornersize: 10
           });
-          canvas.centerObject(image);
+          image.setCoords(100, 100);
           canvas.add(image);
           return canvas.renderAll();
         };
@@ -85,6 +85,7 @@ Editor = (function() {
     canvas.forEachObject(function(obj) {
       var element, _i, _len, _ref, _results;
       obj.on('selected', function() {
+        console.log("test");
         if (editor.binding === true) {
           if (editor.groupObj === void 0) {
             editor.groupObj = new fabric.group(obj);

@@ -13,7 +13,7 @@ class Editor
             padding: 10,
             cornersize:10,
           })
-          canvas.centerObject(image);
+          image.setCoords(100,100);
           canvas.add(image);
           canvas.renderAll();
       reader.readAsDataURL e.target.files[0]
@@ -58,6 +58,7 @@ class Editor
     canvas.height = $(window).height()
     canvas.forEachObject( (obj) ->
       obj.on('selected', () ->
+        console.log("test")
         if (editor.binding == true)
           if (editor.groupObj == undefined)
             editor.groupObj = new fabric.group(obj)
