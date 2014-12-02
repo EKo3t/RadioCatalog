@@ -125,6 +125,16 @@ namespace IdentitySample.Models
             InitializeIdentityForEF(context);
             base.Seed(context);
         }
+
+        private static void CreateRole(ApplicationRoleManager roleManager, string roleName)
+        {
+            var role = roleManager.FindByName(roleName);
+            if (role == null)
+            {
+                role = new ApplicationRole(roleName);
+                var roleResult = roleManager.Create(role);
+            }
+        }
        
         public static void InitializeIdentityForEF(ApplicationDbContext db) {
             var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
@@ -133,14 +143,9 @@ namespace IdentitySample.Models
             const string password = "Inv1sibility!";
             const string roleName = "Admin";
             const string userName = "godAdmin";
-
-            //Create Role Admin if it does not exist
-            var role = roleManager.FindByName(roleName);
-            if (role == null) {
-                role = new ApplicationRole(roleName);
-                var roleresult = roleManager.Create(role);
-            }
-
+            CreateRole(roleManager, "Admin");
+            CreateRole(roleManager, "Owner");
+            CreateRole(roleManager, "User");
             var user = userManager.FindByName(name);
             if (user == null) {
                 user = new ApplicationUser { NickName = userName, UserName = name, Email = name };
@@ -148,11 +153,9 @@ namespace IdentitySample.Models
                 user.ConfirmedEmail = true;
                 result = userManager.SetLockoutEnabled(user.Id, false);
             }
-
-            // Add user admin to Role Admin if not already added
             var rolesForUser = userManager.GetRoles(user.Id);
-            if (!rolesForUser.Contains(role.Name)) {
-                var result = userManager.AddToRole(user.Id, role.Name);
+            if (!rolesForUser.Contains(roleName)) {
+                var result = userManager.AddToRole(user.Id, roleName);
             }
         }
     }

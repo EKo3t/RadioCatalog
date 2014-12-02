@@ -149,7 +149,6 @@
     <Content Include="App_Themes\MSN_Blue\Images\bar.JPG" />
     <Content Include="App_Themes\MSN_Blue\Images\bullet.JPG" />
     <Content Include="App_Themes\MSN_Blue\Images\logo.JPG" />
-    <Content Include="App_Themes\MSN_Blue\menuicon.JPG" />
     <Content Include="App_Themes\MSN_CherryBlossom\default.css" />
     <Content Include="App_Themes\MSN_CherryBlossom\Images\bar.JPG" />
     <Content Include="App_Themes\MSN_CherryBlossom\Images\bullet.JPG" />
@@ -215,8 +214,6 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Content\themes\smoothness\jquery-ui.css" />
-    <Content Include="Content\themes\superhero.min.css" />
-    <Content Include="Content\themes\united.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
@@ -225,21 +222,12 @@
     <Content Include="Scripts\fabric.js" />
     <Content Include="Scripts\jquery-ui-1.11.2.js" />
     <Content Include="Scripts\jquery-ui-1.11.2.min.js" />
-    <Content Include="Scripts\Themes\StyleSwitch.js" />
     <Content Include="Views\Language\ChangeLanguage.cshtml" />
     <Content Include="Views\Account\UserProfile.cshtml" />
     <Content Include="Scripts\Editor\CoffeeScript\Editor.coffee" />
     <Content Include="Scripts\Editor\compileCoffeeToJS.bat" />
     <Content Include="Views\Theme\ChangeTheme.cshtml" />
-    <Content Include="App_Themes\MSN_Blue\default.skin" />
-    <Content Include="App_Themes\MSN_CherryBlossom\default.skin" />
-    <Content Include="App_Themes\MSN_Finance\default.skin" />
-    <Content Include="App_Themes\MSN_Morning\default.skin" />
-    <Content Include="App_Themes\MSN_Purple\default.skin" />
-    <Content Include="App_Themes\MSN_Red\default.skin" />
-    <Content Include="App_Themes\WinXP_Blue\default.skin" />
     <Content Include="App_Themes\WinXP_Blue\Images\Thumbs.db" />
-    <Content Include="App_Themes\WinXP_Silver\default.skin" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

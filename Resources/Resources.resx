@@ -186,4 +186,37 @@
   <data name="Load" xml:space="preserve">
     <value>Load</value>
   </data>
+  <data name="AddDetail" xml:space="preserve">
+    <value>Add detail</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="CheckEmailConfirm" xml:space="preserve">
+    <value>Please check your email and confirm your email address.</value>
+  </data>
+  <data name="ClickForLogin" xml:space="preserve">
+    <value>Click here for login</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="ConfirmSuccessMessage" xml:space="preserve">
+    <value>Thank you for confirming your email. Please</value>
+  </data>
+  <data name="CreateNewAcc" xml:space="preserve">
+    <value>Create new account</value>
+  </data>
+  <data name="EmailConfirmation" xml:space="preserve">
+    <value>Email confirmation</value>
+  </data>
+  <data name="PassConfirmErrorMsg" xml:space="preserve">
+    <value>The password and confirmation password do not match.</value>
+  </data>
+  <data name="UserEditor" xml:space="preserve">
+    <value>User editing</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>User name</value>
+  </data>
 </root>

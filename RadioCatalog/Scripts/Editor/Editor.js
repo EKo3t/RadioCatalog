@@ -21,6 +21,11 @@ Editor = (function() {
             padding: 10,
             cornersize: 10
           });
+          editor.AddSelectEventForObject(image);
+          editor.AddMoveEventForObject(image);
+          if (image.type === void 0) {
+            image.type = "image";
+          }
           image.setCoords(0, 0);
           canvas.add(image);
           return canvas.renderAll();
@@ -31,10 +36,6 @@ Editor = (function() {
     imageLoader = document.getElementById("uploadImg");
     imageLoader.addEventListener("change", handleImage, false);
     return ctx = canvas.getContext("2d");
-  };
-
-  Editor.prototype.addWireDrawing = function() {
-    return editor.wireDrawing = true;
   };
 
   Editor.prototype.makeLine = function(coords) {
@@ -50,13 +51,11 @@ Editor = (function() {
     return editor.binding = true;
   };
 
-  Editor.prototype.addObjBinding = function(obj1, obj2) {
+  Editor.prototype.AddObjBinding = function(obj1, obj2) {
     var element, flag, _i, _len, _ref;
-    if (obj1.bindCount === void 0) {
-      obj1.bindCount = 1;
-    }
     if (obj1.bindedObj === void 0) {
-      obj1.bindedObj = new fabric.group(obj2);
+      obj1.bindedObj = new fabric.Group();
+      obj1.bindedObj.add(obj2);
     }
     if (obj1.bindedObj !== void 0) {
       flag = false;
@@ -73,7 +72,96 @@ Editor = (function() {
     }
   };
 
-  Editor.prototype.createLines = function() {};
+  Editor.prototype.CreateGroupOfLines = function(point1, point2) {
+    var group, line;
+    group = new fabric.Group();
+    line = editor.makeLine([point1.x, point1.y, point2.x, point1.y]);
+    group.add(line);
+    line = editor.makeLine([point2.x, point1.y, point2.x, point2.y]);
+    group.add(line);
+    return group;
+  };
+
+  Editor.prototype.CreateLines = function(obj1, obj2) {
+    var dist, element1, element2, group, min, minElement1, minElement2, _i, _j, _len, _len1, _ref, _ref1;
+    obj1.middlePoint = new Array(obj1.mt, obj1.ml, obj1.mr, obj1.mb);
+    obj2.middlePoint = new Array(obj2.mt, obj2.ml, obj2.mr, obj2.mb);
+    min = Infinity;
+    _ref = obj1.middlePoint;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      element1 = _ref[_i];
+      _ref1 = obj2.middlePoint;
+      for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+        element2 = _ref1[_j];
+        dist = Math.pow(element1.x - element2.x, 2) + Math.pow(element1.y - element2.y, 2);
+        if (dist < min) {
+          min = dist;
+          minElement1 = element1;
+          minElement2 = element2;
+        }
+      }
+    }
+    if ((minElement1 !== void 0) && (minElement2 !== void 0)) {
+      return group = editor.CreateGroupOfLines(minElement1, minElement2);
+    }
+  };
+
+  Editor.prototype.AddSelectEventForObject = function(obj) {
+    return obj.on('selected', function() {
+      if (editor.binding === true) {
+        if (editor.groupObj !== void 0) {
+          editor.groupObj.add(obj);
+          editor.AddObjBinding(editor.groupObj.item(0), editor.groupObj.item(1));
+          editor.lineGroup = new fabric.Group();
+          editor.lineGroup.obj1 = editor.groupObj.item(0);
+          editor.lineGroup.obj2 = editor.groupObj.item(1);
+          editor.lineGroup.add(editor.CreateLines(editor.lineGroup.obj1.oCoords, editor.lineGroup.obj2.oCoords));
+          editor.lineGroup.name = "lines";
+          editor.lineGroup.selectable = false;
+          editor.canvas.add(editor.lineGroup);
+          editor.canvas.renderAll();
+          editor.groupObj = void 0;
+          editor.binding = false;
+        }
+        if (editor.groupObj === void 0) {
+          editor.groupObj = new fabric.Group();
+          return editor.groupObj.add(obj);
+        }
+      }
+    });
+  };
+
+  Editor.prototype.AddMoveEventForObject = function(obj) {
+    obj.on('moving', function() {
+      return obj.moving = true;
+    });
+    obj.on('rotating', function() {
+      return obj.moving = true;
+    });
+    obj.on('scaling', function() {
+      return obj.moving = true;
+    });
+    return obj.on('mouseup', function() {
+      var element, _i, _len, _ref, _results;
+      if (obj.moving === true) {
+        obj.moving = false;
+        _ref = editor.canvas._objects;
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          element = _ref[_i];
+          if (element.name === "lines") {
+            element.remove(element.item(0));
+            element.remove(element.item(1));
+            element.add(editor.CreateLines(element.obj1.oCoords, element.obj2.oCoords));
+            _results.push(editor.canvas.renderAll());
+          } else {
+            _results.push(void 0);
+          }
+        }
+        return _results;
+      }
+    });
+  };
 
   Editor.prototype.init = function() {
     this.canvas = new fabric.Canvas('editor', {
@@ -81,27 +169,6 @@ Editor = (function() {
     });
     this.canvas.width = $(window).width();
     this.canvas.height = $(window).height();
-    this.canvas.forEachObject(function(obj) {
-      var element, _i, _len, _ref, _results;
-      obj.on('selected', function() {
-        console.log("test");
-        if (editor.binding === true) {
-          if (editor.groupObj === void 0) {
-            editor.groupObj = new fabric.group(obj);
-          }
-          if (editor.groupObj.count === 2) {
-            return addObjBinding(editor.groupObj[0], editor.groupObj[1]);
-          }
-        }
-      });
-      _ref = obj1.bindedObj;
-      _results = [];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        element = _ref[_i];
-        _results.push(this.createLines());
-      }
-      return _results;
-    });
     return this.addImageLoadEvent(this.canvas);
   };
 

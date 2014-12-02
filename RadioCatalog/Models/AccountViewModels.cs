@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Security.AccessControl;
 using Resources;
 
 namespace IdentitySample.Models
@@ -53,10 +54,10 @@ namespace IdentitySample.Models
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Password", ResourceType = typeof(Resources.Resources))]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "RememberMe", ResourceType = typeof(Resources.Resources))]
         public bool RememberMe { get; set; }
     }
 
@@ -69,19 +70,20 @@ namespace IdentitySample.Models
 
         [Required]
         [StringLength(15, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 4)]
-        [Display(Name = "User name")]
+        [Display(Name = "UserName", ResourceType = typeof(Resources.Resources))]
         public string NickName { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Password", ResourceType = typeof(Resources.Resources))]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "ConfirmPassword", ResourceType = typeof(Resources.Resources))]
+        [Compare("Password", ErrorMessageResourceName = "PassConfirmErrorMsg", ErrorMessageResourceType = typeof(Resources.Resources))]
         public string ConfirmPassword { get; set; }
+        [Display(Name = "Address", ResourceType = typeof(Resources.Resources))]
         public string Address { get; set; }
     }
 

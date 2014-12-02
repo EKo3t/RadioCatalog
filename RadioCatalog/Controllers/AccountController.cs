@@ -173,6 +173,7 @@ namespace IdentitySample.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    UserManager.AddToRole(user.Id, "User");
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
@@ -196,6 +197,9 @@ namespace IdentitySample.Controllers
                 return View("Error");
             }
             var result = await UserManager.ConfirmEmailAsync(userId, code);
+            var user = await UserManager.FindByIdAsync(userId);
+            user.ConfirmedEmail = true;
+            await UserManager.UpdateAsync(user);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 

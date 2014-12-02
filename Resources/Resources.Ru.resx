@@ -145,7 +145,7 @@
     <value>Выйти</value>
   </data>
   <data name="Register" xml:space="preserve">
-    <value>Зарегестрироваться</value>
+    <value>Зарегистрироваться</value>
   </data>
   <data name="RegisterNewUser" xml:space="preserve">
     <value>Зарегистрировать новый аккаунт?</value>
@@ -185,5 +185,38 @@
   </data>
   <data name="Load" xml:space="preserve">
     <value>Загрузить</value>
+  </data>
+  <data name="AddDetail" xml:space="preserve">
+    <value>Добавить деталь</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Адрес</value>
+  </data>
+  <data name="CheckEmailConfirm" xml:space="preserve">
+    <value>Пожалуйста, зайдите на почту и подтвердите свой почтовый ящик.</value>
+  </data>
+  <data name="ClickForLogin" xml:space="preserve">
+    <value>Нажмите здесь, чтобы войти</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Подтверждение пароля</value>
+  </data>
+  <data name="ConfirmSuccessMessage" xml:space="preserve">
+    <value>Спасибо, что подтвердили почту. Пожалуйста, </value>
+  </data>
+  <data name="CreateNewAcc" xml:space="preserve">
+    <value>Создать новую учетную запись</value>
+  </data>
+  <data name="EmailConfirmation" xml:space="preserve">
+    <value>Подтверждение почты</value>
+  </data>
+  <data name="PassConfirmErrorMsg" xml:space="preserve">
+    <value>Введенные пароли не совпадают</value>
+  </data>
+  <data name="UserEditor" xml:space="preserve">
+    <value>Управление пользователями</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Имя аккаунта</value>
   </data>
 </root>

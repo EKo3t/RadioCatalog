@@ -116,19 +116,6 @@ class Editor
     @canvas.width = $(window).width()
     @canvas.height = $(window).height()
     @addImageLoadEvent(@canvas)
-    @canvas.forEachObject( (obj) ->
-      obj.on('selected', () ->
-        console.log("test")
-        if (editor.binding == true)
-          if (editor.groupObj == undefined)
-            editor.groupObj = new fabric.group(obj)
-          if (editor.groupObj.count == 2)
-            addObjBinding(editor.groupObj[0], editor.groupObj[1])
-      )
-      for element in obj1.bindedObj
-        @createLines()
-    )
-    @addImageLoadEvent(@canvas)
   
   save: ->
     jsonString = document.getElementById("jsonString")

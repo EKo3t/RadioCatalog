@@ -12,14 +12,10 @@
 <h2>UserProfile</h2>
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="theme" type="text/css" title="default" href="@Url.Content("~/Content/bootstrap.min.css")">
-        <link rel="theme" type="text/css" title="supehero" href="@Url.Content("~/Content/themes/superhero.min.css")">
-        <link rel="theme" type="text/css" title="united" href="@Url.Content("~/Content/themes/united.min.css")">
+    <head>       
         <link rel="stylesheet" type="text/css" title="jquery-ui" href="@Url.Content("~/Content/themes/smoothness/jquery-ui.css")"> 
         <script src="~/Scripts/jquery-ui-1.11.2.min.js"></script>       
-        <script src="~/Scripts/jquery-1.10.2.min.js"></script>       
-        <script src="~/Scripts/Themes/StyleSwitch.js"></script>    
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>          
         <script src="~/Scripts/Editor/Editor.js"></script> 
         <script src="~/Scripts/fabric.js"></script> 
         <title>Tabs</title>
@@ -34,9 +30,18 @@
     <body>
         <div id="tabs">
             <ul>
-                <li><a href="#tabs-1">User Editor</a></li>
-                <li><a href="#tabs-2">Detail Editor</a></li>
-                <li><a href="#tabs-3">Theme Edit</a></li>
+                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <li><a href="#tabs-1">@Resources.UserEditor</a></li>
+                }
+                @if (Request.IsAuthenticated && (User.IsInRole("Owner") || (User.IsInRole("Admin")) ))
+                {
+                    <li><a href="#tabs-2">@Resources.AddDetail</a></li>
+                }
+                @if (Request.IsAuthenticated)
+                {
+                    <li><a href="#tabs-3">Detail Editor</a></li>
+                }
             </ul>
             @if (Request.IsAuthenticated && User.IsInRole("Admin"))
             {
@@ -46,11 +51,10 @@
                 </div>
             }
                    
-            <div id="tabs-2">
+            <div id="tabs-3">
                 <form id="uploadImg">
                     <input type="file" id="uploadedImg" name="imageLoader"/>
                 </form>
-                <input type="button" id="addWire" value=@Resources.AddWire name="addWire" onclick="editor.addWireDrawing()"/>
                 <input type="button" id="addBind" value=@Resources.AddBind name="addBind" onclick="editor.addBinding()"/>
                 @using (@Html.BeginForm("Save", "Scheme", FormMethod.Get, new { name="saveImg", id="saveImg" }))
                 {
@@ -61,12 +65,7 @@
                 <canvas id="editor" width="800" height="600" style="border:1px solid #000000;"></canvas>
                 <script> editor.init() </script>
             </div>
-            <div id="tabs-3">
-                <form>                  
-                    <input type="submit" onclick="switch_style('superhero');return false;" name="superhero_theme" value="superhero Theme" id="superhero_btn">
-                    <input type="submit" onclick="switch_style('united');return false;" name="unite_theme" value="united Theme" id="united_btn">
-                    <input type="submit" onclick="switch_style('default');return false;" name="default_theme" value="default Theme" id="default_btn">
-                </form>
+            <div id="tabs-2">
             </div>
         </div>
     </body>
