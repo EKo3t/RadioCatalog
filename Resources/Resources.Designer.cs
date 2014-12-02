@@ -151,6 +151,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Circuit editor.
+        /// </summary>
+        public static string CircuitEditor {
+            get {
+                return ResourceManager.GetString("CircuitEditor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Click here for login.
         /// </summary>
         public static string ClickForLogin {
@@ -318,6 +327,15 @@ namespace Resources {
         public static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Save_as_Pdf.
+        /// </summary>
+        public static string SaveAsPdf {
+            get {
+                return ResourceManager.GetString("SaveAsPdf", resourceCulture);
             }
         }
         

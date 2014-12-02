@@ -18,6 +18,9 @@
         <script src="~/Scripts/jquery-1.10.2.min.js"></script>          
         <script src="~/Scripts/Editor/Editor.js"></script> 
         <script src="~/Scripts/fabric.js"></script> 
+        <script src="~/Scripts/Editor/DetailEditor.js"></script>
+        <script src="~/Scripts/jspdf.js"></script>
+        <script src="~/Scripts/jspdf.plugin.addimage.js"></script>
         <title>Tabs</title>
         <script>
             $(function () {
@@ -34,28 +37,26 @@
                 {
                     <li><a href="#tabs-1">@Resources.UserEditor</a></li>
                 }
-                @if (Request.IsAuthenticated && (User.IsInRole("Owner") || (User.IsInRole("Admin")) ))
+                @if (Request.IsAuthenticated && ( User.IsInRole("Owner") || User.IsInRole("Admin") ))
                 {
                     <li><a href="#tabs-2">@Resources.AddDetail</a></li>
                 }
                 @if (Request.IsAuthenticated)
                 {
-                    <li><a href="#tabs-3">Detail Editor</a></li>
+                    <li><a href="#tabs-3">@Resources.CircuitEditor</a></li>
                 }
             </ul>
-            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-            {
-                <div id="tabs-1">
-                    <h5>@Html.ActionLink(@Resources.RolesAdmin, "Index", "RolesAdmin")</h5>
-                    <h5>@Html.ActionLink(@Resources.UsersAdmin, "Index", "UsersAdmin")</h5>
-                </div>
-            }
+            <div id="tabs-1">
+                <h5>@Html.ActionLink(Resources.RolesAdmin, "Index", "RolesAdmin")</h5>
+                <h5>@Html.ActionLink(Resources.UsersAdmin, "Index", "UsersAdmin")</h5>
+            </div>
                    
             <div id="tabs-3">
                 <form id="uploadImg">
                     <input type="file" id="uploadedImg" name="imageLoader"/>
                 </form>
                 <input type="button" id="addBind" value=@Resources.AddBind name="addBind" onclick="editor.addBinding()"/>
+                <input type="button" id="saveAsPdf" value=@Resources.SaveAsPdf name="load" onclick="editor.saveAsPdf()" />
                 @using (@Html.BeginForm("Save", "Scheme", FormMethod.Get, new { name="saveImg", id="saveImg" }))
                 {
                     <input type="hidden" id="jsonString" name="jsonString" @getSchemeText() /> <!--value="@RadioCatalog.Helpers.HtmlHelper.getSchemeText(@Model)"-->
@@ -66,6 +67,7 @@
                 <script> editor.init() </script>
             </div>
             <div id="tabs-2">
+                @Html.Partial("_CircuitEditor")
             </div>
         </div>
     </body>

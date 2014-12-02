@@ -5,7 +5,7 @@ Editor = (function() {
   function Editor() {}
 
   Editor.prototype.addImageLoadEvent = function(canvas) {
-    var ctx, handleImage, imageLoader;
+    var handleImage, imageLoader;
     handleImage = function(e) {
       var reader;
       reader = new FileReader();
@@ -34,8 +34,7 @@ Editor = (function() {
       return reader.readAsDataURL(e.target.files[0]);
     };
     imageLoader = document.getElementById("uploadImg");
-    imageLoader.addEventListener("change", handleImage, false);
-    return ctx = canvas.getContext("2d");
+    return imageLoader.addEventListener("change", handleImage, false);
   };
 
   Editor.prototype.makeLine = function(coords) {
@@ -120,10 +119,11 @@ Editor = (function() {
           editor.lineGroup.selectable = false;
           editor.canvas.add(editor.lineGroup);
           editor.canvas.renderAll();
+          editor.groupObj.remove(editor.lineGroup.obj1);
+          editor.groupObj.remove(editor.lineGroup.obj2);
           editor.groupObj = void 0;
-          editor.binding = false;
-        }
-        if (editor.groupObj === void 0) {
+          return editor.binding = false;
+        } else if (editor.groupObj === void 0) {
           editor.groupObj = new fabric.Group();
           return editor.groupObj.add(obj);
         }
@@ -164,12 +164,22 @@ Editor = (function() {
   };
 
   Editor.prototype.init = function() {
+    var ctx;
     this.canvas = new fabric.Canvas('editor', {
       selection: false
     });
-    this.canvas.width = $(window).width();
-    this.canvas.height = $(window).height();
-    return this.addImageLoadEvent(this.canvas);
+    this.canvas.width = 800;
+    this.canvas.height = 600;
+    this.addImageLoadEvent(this.canvas);
+    return ctx = this.canvas.getContext("2d");
+  };
+
+  Editor.prototype.saveAsPdf = function() {
+    var doc, imgData;
+    doc = new jsPDF();
+    imgData = editor.canvas.toDataURL("images/jpeg", 1.0);
+    doc.addImage(imgData, 'JPEG', 0, 0);
+    return doc.save("download.pdf");
   };
 
   Editor.prototype.save = function() {

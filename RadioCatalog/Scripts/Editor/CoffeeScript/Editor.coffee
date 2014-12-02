@@ -23,7 +23,6 @@ class Editor
       reader.readAsDataURL e.target.files[0]
     imageLoader = document.getElementById("uploadImg")
     imageLoader.addEventListener "change", handleImage, false
-    ctx = canvas.getContext("2d")
 
   makeLine: (coords) ->
     new fabric.Line(coords,  
@@ -85,9 +84,11 @@ class Editor
           editor.lineGroup.selectable = false
           editor.canvas.add(editor.lineGroup)
           editor.canvas.renderAll()
+          editor.groupObj.remove(editor.lineGroup.obj1)
+          editor.groupObj.remove(editor.lineGroup.obj2)
           editor.groupObj = undefined
           editor.binding = false
-        if (editor.groupObj == undefined)
+        else if (editor.groupObj == undefined)
           editor.groupObj = new fabric.Group()
           editor.groupObj.add(obj)
     )
@@ -113,9 +114,16 @@ class Editor
   init: ->
     @canvas = new fabric.Canvas('editor', 
       selection: false)
-    @canvas.width = $(window).width()
-    @canvas.height = $(window).height()
+    @canvas.width = 800
+    @canvas.height = 600
     @addImageLoadEvent(@canvas)
+    ctx = @canvas.getContext("2d")
+
+  saveAsPdf: ->
+    doc = new jsPDF()
+    imgData = editor.canvas.toDataURL("images/jpeg", 1.0)
+    doc.addImage(imgData, 'JPEG', 0, 0)
+    doc.save("download.pdf")
   
   save: ->
     jsonString = document.getElementById("jsonString")

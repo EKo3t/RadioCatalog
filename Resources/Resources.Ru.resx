@@ -195,6 +195,9 @@
   <data name="CheckEmailConfirm" xml:space="preserve">
     <value>Пожалуйста, зайдите на почту и подтвердите свой почтовый ящик.</value>
   </data>
+  <data name="CircuitEditor" xml:space="preserve">
+    <value>Редактор схем</value>
+  </data>
   <data name="ClickForLogin" xml:space="preserve">
     <value>Нажмите здесь, чтобы войти</value>
   </data>
@@ -212,6 +215,9 @@
   </data>
   <data name="PassConfirmErrorMsg" xml:space="preserve">
     <value>Введенные пароли не совпадают</value>
+  </data>
+  <data name="SaveAsPdf" xml:space="preserve">
+    <value>Сохранить_в_Pdf</value>
   </data>
   <data name="UserEditor" xml:space="preserve">
     <value>Управление пользователями</value>

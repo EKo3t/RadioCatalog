@@ -179,7 +179,7 @@
     <Content Include="App_Themes\WinXP_Silver\Images\bar.JPG" />
     <Content Include="App_Themes\WinXP_Silver\Images\bullet.JPG" />
     <Content Include="App_Themes\WinXP_Silver\Images\logo.JPG" />
-    <Content Include="Content\Images\a-aMgeyIQuI.jpg" />
+    <Content Include="Content\Images\pbAwFmFWQVA.jpg" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -218,16 +218,21 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
+    <Content Include="Scripts\Editor\DetailEditor.js" />
     <Content Include="Scripts\Editor\Editor.js" />
     <Content Include="Scripts\fabric.js" />
     <Content Include="Scripts\jquery-ui-1.11.2.js" />
     <Content Include="Scripts\jquery-ui-1.11.2.min.js" />
+    <Content Include="Scripts\jspdf.js" />
+    <Content Include="Scripts\jspdf.plugin.addimage.js" />
     <Content Include="Views\Language\ChangeLanguage.cshtml" />
     <Content Include="Views\Account\UserProfile.cshtml" />
     <Content Include="Scripts\Editor\CoffeeScript\Editor.coffee" />
     <Content Include="Scripts\Editor\compileCoffeeToJS.bat" />
     <Content Include="Views\Theme\ChangeTheme.cshtml" />
     <Content Include="App_Themes\WinXP_Blue\Images\Thumbs.db" />
+    <Content Include="Views\Shared\_CircuitEditor.cshtml" />
+    <Content Include="Scripts\Editor\CoffeeScript\DetailEditor.coffee" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
