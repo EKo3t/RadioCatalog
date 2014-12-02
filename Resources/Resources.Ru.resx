@@ -225,4 +225,13 @@
   <data name="UserName" xml:space="preserve">
     <value>Имя аккаунта</value>
   </data>
+  <data name="AddProperty" xml:space="preserve">
+    <value>Добавить_свойство</value>
+  </data>
+  <data name="PropertyName" xml:space="preserve">
+    <value>Название свойства</value>
+  </data>
+  <data name="PropertyValue" xml:space="preserve">
+    <value>Значение свойства</value>
+  </data>
 </root>

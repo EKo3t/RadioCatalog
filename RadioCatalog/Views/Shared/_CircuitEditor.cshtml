@@ -2,5 +2,21 @@
     <input type="file" id="uploadImgBtn" name="imageLoader" />
 </form>
 <canvas id="detailLoad" width="100" height="100" style="border:1px solid #000000;"></canvas>
+<canvas id="propertyDisplay" width="400" height="200" style="border:1px solid #000000;"></canvas>
 
-<script> detailEditor.init() </script>
+<script> detailEditor.Init() </script>
+<fieldset>
+    <p>
+        <label>@Resources.PropertyName</label>
+        <input type="text"
+               id="propertyName"
+               value=""/>
+    </p>
+    <p>
+        <label>@Resources.PropertyValue</label>
+        <input type="text"
+               id="propertyValue"
+               value="" />
+    </p>
+    <input type="button" value=@Resources.AddProperty onclick="detailEditor.AddProperty()"/>
+</fieldset>

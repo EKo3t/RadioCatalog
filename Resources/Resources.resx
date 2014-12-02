@@ -225,4 +225,13 @@
   <data name="UserName" xml:space="preserve">
     <value>User name</value>
   </data>
+  <data name="AddProperty" xml:space="preserve">
+    <value>Add_property</value>
+  </data>
+  <data name="PropertyName" xml:space="preserve">
+    <value>Property name</value>
+  </data>
+  <data name="PropertyValue" xml:space="preserve">
+    <value>Property value</value>
+  </data>
 </root>

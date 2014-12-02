@@ -4,7 +4,7 @@ var DetailEditor, detailEditor;
 DetailEditor = (function() {
   function DetailEditor() {}
 
-  DetailEditor.prototype.addImageLoadEvent = function(canvas) {
+  DetailEditor.prototype.AddImageLoadEvent = function(canvas) {
     var handleImage, imageLoader;
     handleImage = function(e) {
       var reader;
@@ -19,7 +19,8 @@ DetailEditor = (function() {
           image.set({
             angle: 0,
             padding: 10,
-            cornersize: 10
+            cornersize: 10,
+            selectable: false
           });
           if (image.width > 100) {
             image.width = 100;
@@ -46,12 +47,51 @@ DetailEditor = (function() {
     return imageLoader.addEventListener("change", handleImage, false);
   };
 
-  DetailEditor.prototype.init = function() {
+  DetailEditor.prototype.AddProperty = function() {
+    var flag, i, propName, propValue, _i, _ref;
+    propName = document.getElementById('propertyName').value;
+    propValue = document.getElementById('propertyValue').value;
+    if (this.canvas.lastObject !== void 0) {
+      if (this.canvas.propertyName === void 0) {
+        this.canvas.propertyName = new Array();
+        this.canvas.propertyValue = new Array();
+      }
+    }
+    flag = false;
+    for (i = _i = 0, _ref = this.canvas.propertyName.length - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
+      if (this.canvas.propertyName === propName) {
+        flag = true;
+      }
+    }
+    if (flag === false) {
+      this.canvas.propertyName.push(propName);
+      this.canvas.propertyValue.push(propValue);
+    }
+    return detailEditor.DisplayProperties();
+  };
+
+  DetailEditor.prototype.DisplayProperties = function() {
+    var i, text, _i, _ref;
+    this.propCanvas = new fabric.Canvas('propertyDisplay', {
+      selection: false
+    });
+    for (i = _i = 0, _ref = this.canvas.propertyName.length - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
+      text = new fabric.Text(this.canvas.propertyName[i] + ": " + this.canvas.propertyValue[i], {
+        selectable: false,
+        fontSize: 15,
+        fontFamily: 'Ubuntu'
+      });
+      this.propCanvas.add(text);
+    }
+    return this.propCanvas.renderAll();
+  };
+
+  DetailEditor.prototype.Init = function() {
     var ctx;
     this.canvas = new fabric.Canvas('detailLoad', {
       selection: false
     });
-    this.addImageLoadEvent(this.canvas);
+    this.AddImageLoadEvent(this.canvas);
     return ctx = this.canvas.getContext("2d");
   };
 

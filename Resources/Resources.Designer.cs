@@ -88,6 +88,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Add_property.
+        /// </summary>
+        public static string AddProperty {
+            get {
+                return ResourceManager.GetString("AddProperty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Address.
         /// </summary>
         public static string Address {
@@ -282,6 +291,24 @@ namespace Resources {
         public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Property name.
+        /// </summary>
+        public static string PropertyName {
+            get {
+                return ResourceManager.GetString("PropertyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Property value.
+        /// </summary>
+        public static string PropertyValue {
+            get {
+                return ResourceManager.GetString("PropertyValue", resourceCulture);
             }
         }
         
